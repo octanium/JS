@@ -10,6 +10,7 @@ function fun () { // General convention is to start name of function-constructor
 fun.prototype.prop2=30;
 fun.prototype.prop3=40;
 
+// new keyword indicates to javascript that execute fun function as a constructor function
 const obj = new fun(); // creating object using function constructor, the new keyword creates a brand new object and takes care that the this keyword in line 3 and 4 must not point to the global and should point to the newly created object, otherwise the this by default points to global Object
 //__proto__ is inherited prototype of newly created instance eg obj here,whereas prototype is of function constructor
 console.log(obj.__proto__ === fun.prototype);
@@ -32,6 +33,24 @@ console.info(arr);
 const obj2 = { prop3: 10 };
 
 const instanceObj = Object.create(obj2, { prop1: { value: 10 }, prop2: { value: 20 } }); // Now __proto__ of instanceObj will have prop3 property
+
+//Example of Inheritence
+let fun2 = function () {
+    this.prop4 = 60;
+}
+fun2.prototype = fun.prototype; // Works, but a bad Idea
+fun2.prototype = Object.create(fun.prototype); // Better Idea, Reason:Becuase if we use above assignment and wanted to have a different prop3 for fun2, then it will overwrite the prop3 of fun as well
+let instanceOffun2 = new fun2();
+console.log('9090', instanceOffun2.prop4, instanceOffun2.prop3, instanceOffun2.prop2, instanceOffun2.prop1); // Now here we are not able to access prop1 because the this at line 39 points to fun2 and not fun
+//To overcome that
+fun2 = function () {
+    this.prop4 = 60;
+    fun.call(this);
+}
+instanceOffun2 = new fun2();// Equivalent to this = Object.create(fun2);
+console.log('9090', instanceOffun2.prop1);
+
+
 
 // Difference between function-constructor and Object.create    
 // The instance created under function-constructor(ie. obj) inherits from function prototype while
