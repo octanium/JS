@@ -11,6 +11,8 @@ f1();
 // Whenever a function is invoked, a new scope is created for that call. The local variable declared inside the function belong to that scope and they can only be accessed from that function. When the function has finished the execution, the scope is usually destroyed.
 // Closure lets the function continue to access the lexical scope it was defined in at author time.
 // So as we know a variable is destroyed as soon as it's function completes the execution, but in the following example the var X(at line 23) and Y are still holding the refernce to variable b of function outer(which has finished it's execution), so that's what closure does. Closure lets the function continue to access the lexical scope it was defined in at author time. 
+// A closure is a combination of a function and its lexical environment where the function was created.
+
 function outer () {
     var b = 10;
        function inner() {
@@ -83,7 +85,7 @@ for (var i=0;i<5;i++) {
     })();
 }
 
-// A better way
+// A better way. Below code example is a practical Use Case for IIFEs in JavaScript
 for (var i=0;i<5;i++) {
     (function (j){
         setTimeout(function() {
