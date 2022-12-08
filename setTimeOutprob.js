@@ -1,3 +1,68 @@
+// Lexical scope is the abiity of a function to access variables from it's parent scope.
+function f1 () {
+    var a=133;
+    function f2 () {
+        console.log(a); // Since f2 is lexically bounded to f1, f2 can access variable a
+    }
+    f2();
+}
+f1(); 
+
+// Whenever a function is invoked, a new scope is created for that call. The local variable declared inside the function belong to that scope and they can only be accessed from that function. When the function has finished the execution, the scope is usually destroyed.
+// Closure lets the function continue to access the lexical scope it was defined in at author time.
+// So as we know a variable is destroyed as soon as it's function completes the execution, but in the following example the var X(at line 23) and Y are still holding the refernce to variable b of function outer(which has finished it's execution), so that's what closure does. Closure lets the function continue to access the lexical scope it was defined in at author time. 
+function outer () {
+    var b = 10;
+       function inner() {
+            
+             var a = 20; 
+             console.log(a+b);
+        }
+       return inner;
+    }
+    var X = outer(); 
+    var Y = outer(); 
+    
+    X(); 
+    Y();
+
+// A better example
+
+function outer() {
+        let counter = 0
+        const inner = function() {
+                counter = counter + 1
+                return counter
+            }
+        return inner
+    }
+
+const action = outer()
+const c1 = action()
+const c2 = action()
+const c3 = action()
+console.log(c1, c2, c3)
+
+//----------------------------------------------------------------
+
+var b = 10;
+   function inner() {
+        
+         var a = 20; 
+         console.log(a+b);
+    }
+   return inner;
+}
+var X = outer(); 
+var Y = outer(); 
+
+X(); 
+Y();
+
+
+
+
+
 // Closure is already there in below example
 // How? 
 // Say the for loop executes in 800ms, The setTimeout has a closure over the for loop and the closure = reference to variable i, 
