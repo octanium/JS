@@ -45,30 +45,7 @@ console.log(c1, c2, c3)
 
 //----------------------------------------------------------------
 
-var b = 10;
-   function inner() {
-        
-         var a = 20; 
-         console.log(a+b);
-    }
-   return inner;
-}
-var X = outer(); 
-var Y = outer(); 
-
-X(); 
-Y();
-
-
-
-
-
-// Closure is already there in below example
-// How? 
-// Say the for loop executes in 800ms, The setTimeout has a closure over the for loop and the closure = reference to variable i, 
-// the common behavior of for loop should be collected by the garbage collection but it holds the refernce to i in loop,
-// Closure lets the function continue to access the lexical scope it was defined in at author time.
-// so instead of surrendering self to the js garbage collector, the for loop remains there after 800 ms
+// Settimeout problem:
 
 for (var i=0;i<5;i++) {
     setTimeout(function() {
@@ -76,7 +53,15 @@ for (var i=0;i<5;i++) {
     }, 1000);
 }
 
-// Apply a closure using IIFE, IIFE creates a new scope
+// We can see Closure is already there in above example, there is outer function(a loop) and an inner function (setTimeout)
+// The setTimeout has a closure over the for loop and the closure = reference to variable i, 
+// the common behavior of for loop should be that i of loop should be collected by the garbage-collection but it holds the refernce to i in loop, hence a closure
+// so instead of surrendering self to the js garbage collector, the for loop remains there after 800 ms
+
+// The problem here is it prints 55555 instead of 12345. The reason is till the time first timeout occurs, loop has already completed it's execution and i has 5 at that time.
+
+
+// Let's solve by applying a closure using IIFE, IIFE creates a new scope
 // Although there are 5 different scopes created for IIFE, still the i in console points the same mem loc(that is global object)
 
 for (var i=0;i<5;i++) {
@@ -87,8 +72,8 @@ for (var i=0;i<5;i++) {
     })();
 }
 
-// Again there are 5 different scopes created for IIFE, but in the case below value of j in each scope is dependent on run time of for loop.
-// Question: Will for loop be collected by Garbage collector after it's execution?
+// In the example below there are again 5 different scopes created for IIFE, but value of j in each scope is dependent on run time of for loop.
+// Question: Will i of loop be collected by Garbage collector after it's execution?
 for (var i=0;i<5;i++) {
     (function (){
         var j=i; // a better example of utilising a closure
