@@ -1,4 +1,4 @@
-// Lexical scope is the abiity of a function to access variables from it's parent scope.
+// Lexical scope is the abiity of a function to access variables from it's parent scope(even after the parent function's execution is completed).
 function f1 () {
     var a=133;
     function f2 () {
