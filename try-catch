@@ -1,0 +1,34 @@
+
+
+throw statement is used to throw an exception
+If there is no catch block in current function, then the catch block is searched in the callee function on the call stack, if it's not found then the catch 
+block is searched in the next function in call stack and so on. I fno catch block is found then the error is catched by error-reporting-mechanism of JS/Browser.
+
+ways to throw
+1. throw 'Some error'; generates an exception with a string value. There is no stack-trace attached to this error, so  there won't be
+error handling functions, reporters, debuggers.
+
+2. throw new Error('Some error'); generates an Error object with message - 'Some error'. The stack-trace is attached and user is abe to debug
+easily from where the error is being generated. The error objects supports 2 properties 1. name 2. message
+
+3. throw Error('Some error') is same as throw new Error('Some error');
+
+Six possible values can be returned by the name property, which as mentioned correspond to the names of the error's constructors. They are:
+
+Error Name          Description
+
+EvalError           An error in the eval() function has occurred.
+
+RangeError          Out of range number value has occurred.
+
+ReferenceError      An illegal reference has occurred.
+
+SyntaxError         A syntax error within code inside the eval() function has occurred.
+                    All other syntax errors are not caught by try/catch/finally, and will
+                    trigger the default browser error message associated with the error. 
+                    To catch actual syntax errors, you may use the onerror event.
+
+TypeError           An error in the expected variable type has occurred.
+
+URIError            An error when encoding or decoding the URI has occurred 
+                   (ie: when calling encodeURI()).
