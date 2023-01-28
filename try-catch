@@ -11,7 +11,7 @@ error handling functions, reporters, debuggers.
 2. throw new Error('Some error'); generates an Error object with message - 'Some error'. The stack-trace is attached and user is abe to debug
 easily from where the error is being generated. The error objects supports 2 properties 1. name 2. message
 
-3. throw Error('Some error') is same as throw new Error('Some error');
+3. throw Error('Some error') works same as throw new Error('Some error');, the only diff is the formes is a function and the latter is a constructor()
 
 Six possible values can be returned by the name property, which as mentioned correspond to the names of the error's constructors. They are:
 
