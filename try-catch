@@ -17,7 +17,7 @@ Six possible values can be returned by the name property, which as mentioned cor
 
 Error Name          Description
 
-EvalError           An error in the eval() function has occurred.
+EvalError           An error in the eval() function has occurred. So, when we do e.name in catch block it outputs EvalError and e.message is the string message
 
 RangeError          Out of range number value has occurred.
 
